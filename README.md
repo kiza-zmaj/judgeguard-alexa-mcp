@@ -22,8 +22,9 @@ It implements a self-hosted **Model Context Protocol (MCP)** server over **Strea
 
 > **Clarifications for Judges:**  
 > 1. **Transport Architecture:** The implementation uses Streamable HTTP JSON-RPC POST requests (`/mcp`) for all MCP protocol operations (`initialize`, `tools/list`, `tools/call`). The GET endpoint provides an SSE event stream for UI telemetry and asynchronous audit events.  
-> 2. **Policy Grounding Lineage:** Google NotebookLM was utilized during the development phase as our research reference environment (Notebook ID: `82440dea-0a12-40a7-a249-0ba460f69611`). For reproducible evaluation, the public server embeds a deterministic, verified local policy corpus so judges do not require access to private notebooks or external credentials.  
-> 3. **Alexa+ Web Simulator:** The simulator (`http://127.0.0.1:8765/simulator`) is our custom demonstration web application created to showcase real-time agentic workflows and the JudgeGuard HUD. It is not Amazon's internal simulator.
+> 2. **Policy Grounding Lineage:** Google NotebookLM was utilized during the development phase as our research reference environment. For reproducible evaluation, the public server embeds a deterministic, verified local policy corpus derived from official hackathon rules, so judges do not require access to private notebooks or external credentials.  
+> 3. **AWS Bedrock Dispatch:** The repository implements live AWS Bedrock dispatch for Claude 3.5 Sonnet and Amazon Titan Text Express, while automated tests and public evaluation use a deterministic fallback when AWS credentials are unavailable.
+> 4. **Alexa+ Web Simulator:** The simulator (`http://127.0.0.1:8765/simulator`) is our custom demonstration web application created to showcase real-time agentic workflows and the JudgeGuard HUD. It is not Amazon's internal simulator.
 
 ---
 
@@ -52,7 +53,7 @@ python3 -m unittest test_server.py test_protocol.py
 ```
 **Test Baseline:**
 - **Command:** `python3 -m unittest test_server.py test_protocol.py`
-- **Result:** `Ran 19 tests in 0.093s - OK` (19 passed, 0 failures, 0 errors)
+- **Result:** `Ran 21 tests in 0.096s - OK` (21 passed, 0 failures, 0 errors)
 - **Environment:** Python 3.12.3 on Linux x86_64 (`Linux 6.8.0-101-generic`)
 
 ---
